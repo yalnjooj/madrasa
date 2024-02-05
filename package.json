@@ -11,11 +11,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/text-to-speech": "^5.0.2",
+    "gtts": "^0.2.1",
     "hid-barcode-scanner": "^1.0.6",
-    "nodemon": "^3.0.3"
+    "pipe": "^1.1.0",
+    "play-sound": "^1.1.6"
   },
   "devDependencies": {
     "@types/node": "^20.11.11",
+    "nodemon": "^3.0.3",
     "typescript": "^5.3.3"
   }
 }
