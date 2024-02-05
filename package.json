@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@google-cloud/text-to-speech": "^5.0.2",
+    "dotenv": "^16.4.1",
     "gtts": "^0.2.1",
     "hid-barcode-scanner": "^1.0.6",
     "pipe": "^1.1.0",

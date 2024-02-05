@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "madrash",
+  "private_key_id": "e11a98741bfa3cac1b8b74dfce39d5b066a6e66c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDFfCKqbkyh1I09\nL+oFNIf1i7bnJTehO581mkFg5p3L+4rZRpzZRzwPC5nGw4WcEHyacC91iQAIfmq6\nz5IvgsPxifVzuwXSGayQk4cc/kB1R+voSuw0Ct6iIaXYyPFdRjz/uTz3hW7nuIkU\nzy6HAICMw7tnxLgVUylwEvmfVnZ+J3XvZhiqKG6cZkfliUdZTutaSvIQk/hr46ZL\nC2soky7NY9Oisg3BIkf7NXu1f4eMpx3tiZX2xhlKvUAqYfXJkqF8PjqfCe2KyDrl\noRooZF8hjzAs5cqXbkcCzONUogWBL+RF+5ahvuJVDBgTWo9UuTAXxkJLBRgb4o0D\nk8bOeAoRAgMBAAECggEAAViQk+t0h5XUm0TRqioVfc2Z+DFUvmXoS+E6mNfO3i5f\nX+O5+0Z1A6qR6GePaDo53y5B5IyD0jWqXI5AR3qeA0NsHNclea0bHqZ4FpvVAfef\nhVHIElgQnwzuUxqWKos+rITYBDKF8vuwU31Qqog3rWiYGmOeLZGyMpqugNuCAJIZ\nNu67W7FuUiCOU0e6413w5LqMn5J0U19xz8G7Oz1pdmTwg9f5tsLRWvmnst+BElF/\nMEKCSZkK4gc56XnSCUiO4SwBqBWKmv0NGl3E7htVyOPDEZKEG0M6F6YO3icUlcRV\nkMqoYbr66/ZQMSlmHwb1SESeH49/M/4sUEaDzJNcwQKBgQDkzNn1i/RvD+qn1LdF\nSU8lXsJWcveZy3/EFQnrvKRo82yNrl7/fNSPEX41PyReaLC3SUD3dIKJ3mNE2ShU\nNxiYfR0i8lNmptv6wwC0BGAiAjQacSfj+3osuNySB7Jf1zq+OFB1zVVA/d7zHUYI\nidnnBxufOyvpfqbu/UhODNK5/QKBgQDc9kF2jVIs43qaC9JLLVOvDjF7EYfLnv5V\nS6oycnELgLVqL6Y5BVYPxBL4+kByOKbTrT7A1fGEfj9FCk9Oyk2ejGBtNfXwzrj/\ng48546xrm8txby4JgZbcRUR2n+EWRtoFUAYoP8Nt+4f+Sf4DHAVRJoDD0ckUKQ2X\nRaEEW7nypQKBgFVEotYH2oipfeIePE7uCzj6H6LoJa6DUJJa5N+d5gfW8FW87lp4\nwx6ufkKJzZwBmBo2iqeuHBgVcRlvdMAt6FSsC/fCJ6LR/Jlvowtztf/2okRYd21X\ngyi3nDwv8iIVrCbIBfRhGaym8DfaaQc1mKeo1np5KtxR/xSCADhWPxJhAoGBAIBn\n5vEC/T8yzruYpROk+p2fTOfs7xJIihp9RyHb2Y/KsyJLIHjAfhvZYQEpRKxb+a7H\nXdFoQtsxFomDjUUHUYYSo7KzigHv0BhElsYYZcl/FwILjyBdG5NT+Y5KKN7uO6Kc\nt4dKTsKqSoRe8WtTLE/VZTzmu8iodspy3ziOKYg1AoGAdH/sCeuAZMzql55/KBbc\nte8xFI4GewZMxsITTkqh9GXK+E7a2g/NFedvWlsu3EKWVXM3ygB1a8+p6dg78SSO\nJH/OndVJgDXXS4h8+36YY5lX2CvOXuTj26CH7hu/h9cwYv1U0UbT6Maulhnci0yP\nrjqL/yNHxIc0asrx1cNv1ZY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "madrasah@madrash.iam.gserviceaccount.com",
+  "client_id": "111644616696117073505",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/madrasah%40madrash.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

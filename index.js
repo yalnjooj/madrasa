@@ -1,6 +1,12 @@
 import { getDevices, UsbScanner } from 'hid-barcode-scanner';
 import allOptions from 'play-sound';
+import Gtts from 'gtts';
+import textToSpeech from "@google-cloud/text-to-speech";
+import fs from "fs";
+import util from "util";
+import A from 'dotenv';
 
+A.config()
 const player = allOptions()
 // console.log(getDevices());
 player.opts = {}
@@ -49,51 +55,49 @@ player.opts = {}
 //  To stop scanning, you can use:
 // scanner.stopScanning();
 
-
-// import Gtts from 'gtts';
-// import pipe from 'pipe';
-// pipe.install()
-
+// FIRST WAY TO CONFERM TEXT TO SPWACH ** 1  **
+// async function textToSpeach1() {
 //   const gtts = new Gtts('فِراسْ بِنْ عمرْ', 'ar');
-//   console.log(gtts.stream())
 
 
-  // gtts.save('src/audio/hello.mp3', function (err, result) {
-  //   if(err) { throw new Error(err) }
-  //   console.log('Success! Open file src/audio/hello.mp3 to hear result.');
-  // });
+//   gtts.save('src/audio/hello.mp3', function (err, result) {
+//     if(err) { throw new Error(err) }
+//     console.log('Success! Open file src/audio/hello.mp3 to hear result.');
+//   });
+// }
+// textToSpeach1();
 
 
-  // Imports the Google Cloud client library
-import textToSpeech from "@google-cloud/text-to-speech";
 
-// Import other required libraries
-  import fs from "fs";
-  import util from "util";
+// FIRST WAY TO CONFERM TEXT TO SPWACH ** 2  **
+  // async function textToSpeach2() {
 
-  // Creates a client
-const client = new textToSpeech.TextToSpeechClient();
+  // const client = new textToSpeech.TextToSpeechClient();
+  // // The text to synthesize
+  // const text = 'سارهْ فيصلْ المُوَلّدْ';
 
-async function quickStart() {
-  // The text to synthesize
-  const text = 'سارهْ فيصلْ المُوَلّدْ';
+  // // Construct the request
+  // const request = {
+  //   input: {text: text},
+  //   // Select the language and SSML voice gender (optional)
+  //   voice: {languageCode: 'ar-XA', ssmlGender: 'NEUTRAL', name: 'ar-XA-Wavenet-B'},
+  //   // select the type of audio encoding
+  //   audioConfig: {
+  //     audioEncoding: "LINEAR16",
+  //     effectsProfileId: [
+  //       "small-bluetooth-speaker-class-device"
+  //     ],
+  //     pitch: 0,
+  //     speakingRate: 1
+  //   },
+  // };
 
-  // Construct the request
-  const request = {
-    input: {text: text},
-    // Select the language and SSML voice gender (optional)
-    voice: {languageCode: 'ar', ssmlGender: 'NEUTRAL'},
-    // select the type of audio encoding
-    audioConfig: {audioEncoding: 'MP3'},
-  };
-
-
-    // Performs the text-to-speech request
-    const [response] = await client.synthesizeSpeech(request);
+  //   // Performs the text-to-speech request
+  //   const [response] = await client.synthesizeSpeech(request);
     
-    // Write the binary audio content to a local file
-    const writeFile = util.promisify(fs.writeFile);
-    await writeFile('src/audio/output.mp3', response.audioContent, 'binary');
-    console.log('Audio content written to file: output.mp3');
-  }
-  quickStart();
+  //   // Write the binary audio content to a local file
+  //   const writeFile = util.promisify(fs.writeFile);
+  //   await writeFile('src/audio/output.mp3', response.audioContent, 'binary');
+  //   console.log('Audio content written to file: output.mp3');
+  // }
+  // textToSpeach2();
