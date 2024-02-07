@@ -5,11 +5,22 @@ import textToSpeech from "@google-cloud/text-to-speech";
 import fs from "fs";
 import util from "util";
 import A from 'dotenv';
+import sqlite3 from 'sqlite3';
 
+const mainList = [];
+
+sqlite3.verbose()
 A.config()
+
 const player = allOptions()
-// console.log(getDevices());
 player.opts = {}
+// console.log(getDevices());
+let sql;
+
+// connect to database
+const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (err)=>{
+     if(err) return console.error(err.message);
+})
 
 
 
@@ -37,13 +48,36 @@ player.opts = {}
       vendorId: 3599,
       productId: 6
  });
+
  scanner.events.on('data', (data) => {
 
-    player.play('src/audio/bsmalah.mp3', function(err){
-      if (err) throw err
-    })
-    console.log(data);
+// 6288030000564
 
+
+
+     if(!(typeof data === 'number') && (data.length > 5) ) {
+
+          sql = `SELECT personId FROM madrasah WHERE barcodeKey = ?`;
+
+          db.get(sql, [data], (err, personId)=>{
+
+               
+               if(err) return console.error(err.message);
+               if(personId == undefined) {
+                    console.log('THARE IS NO DATA!!')
+               } else {
+                    mainList.push(personId.personId)
+                    console.log('ADD: ', personId.personId)
+                    // console.log(personId.personId);
+               }
+               
+          });
+
+     } else {
+          console.log('IS NOT A NUMBER !! OR LESS THEN 5')
+     }
+     
+        
 });
 
 
@@ -70,34 +104,114 @@ player.opts = {}
 
 
 // FIRST WAY TO CONFERM TEXT TO SPWACH ** 2  **
-  // async function textToSpeach2() {
 
-  // const client = new textToSpeech.TextToSpeechClient();
-  // // The text to synthesize
-  // const text = 'سارهْ فيصلْ المُوَلّدْ';
+//   async function textToSpeach2(name, barcode) {
 
-  // // Construct the request
-  // const request = {
-  //   input: {text: text},
-  //   // Select the language and SSML voice gender (optional)
-  //   voice: {languageCode: 'ar-XA', ssmlGender: 'NEUTRAL', name: 'ar-XA-Wavenet-B'},
-  //   // select the type of audio encoding
-  //   audioConfig: {
-  //     audioEncoding: "LINEAR16",
-  //     effectsProfileId: [
-  //       "small-bluetooth-speaker-class-device"
-  //     ],
-  //     pitch: 0,
-  //     speakingRate: 1
-  //   },
-  // };
+  
+          
+     
+//   const client = new textToSpeech.TextToSpeechClient();
+//   // The text to synthesize
+//   const text = name;
 
-  //   // Performs the text-to-speech request
-  //   const [response] = await client.synthesizeSpeech(request);
+//   // Construct the request
+//   const request = {
+//     input: {text: text},
+//     // Select the language and SSML voice gender (optional)
+//     voice: {languageCode: 'ar-XA', ssmlGender: 'NEUTRAL', name: 'ar-XA-Wavenet-B'},
+//     // select the type of audio encoding
+//     audioConfig: {
+//       audioEncoding: "LINEAR16",
+//       effectsProfileId: [
+//         "small-bluetooth-speaker-class-device"
+//       ],
+//       pitch: 0,
+//       speakingRate: 1
+//     },
+//   };
+
+//     // Performs the text-to-speech request
+//     const [response] = await client.synthesizeSpeech(request);
     
-  //   // Write the binary audio content to a local file
-  //   const writeFile = util.promisify(fs.writeFile);
-  //   await writeFile('src/audio/output.mp3', response.audioContent, 'binary');
-  //   console.log('Audio content written to file: output.mp3');
-  // }
-  // textToSpeach2();
+//     // Write the binary audio content to a local file
+//     const writeFile = util.promisify(fs.writeFile);
+//     await writeFile(`src/audio/${barcode}.mp3`, response.audioContent, 'binary');
+//     console.log(`Audio content written to file: ${barcode}.mp3`);
+
+
+//   }
+  
+
+
+
+
+
+          // let db = open({
+          //   filename: 'src/db/database.db',
+          //   driver: sqlite3.Database
+          // })
+
+          // CREATE TABLE
+               // sql = `CREATE TABLE madrasah(id INTEGER PRIMARY KEY AUTOINCREMENT, personId INTEGER UNIQUE, dadIdnefacation INTEGER,  barcodeKey INTEGER UNIQUE, fullName varchar(255), editFullName varchar(255), phoneNumber INTEGER, geder varchar(255), lang varchar(255), soundPath varchar(255))`;
+               // db.run(sql, (err)=>{
+               //           if(err) return console.error(err.message);
+               //      });
+          
+
+          // DROP TABLE
+          // db.run('DROP TABLE madrasah');
+
+          // INSERT DATA INTO TABLE
+          // sql = `INSERT INTO madrasah(personId, dadIdnefacation,  barcodeKey, fullName, editFullName, phoneNumber, geder, lang, soundPath) VALUES (?,?,?,?,?,?,?,?,?)`;
+          // db.run(sql,[1129415771, 1479453541, 3438547, 'خالد بن محمد العمري', 'خالد بن محمد العمري', 966542154879, 'female', 'ar', 'path'], (err)=>{
+          //      if(err) return console.error(err.message);
+          // });
+
+
+          // UPDATE DATA
+          // sql = `UPDATE madrasah SET barcodeKey=? WHERE personId=?`;
+          // db.run(sql,[6288030000564, 1129414771], (err)=>{
+          //      if(err) return console.error(err.message);
+          // });
+
+          // DELATE DATA
+          // sql = `DELETE FROM madrasah WHERE id = ?`;
+          // db.run(sql, [3], (err)=>{
+          //      if(err) return console.error(err.message);
+          // });
+
+
+          // QUERY THE DATA
+          // sql = `SELECT * FROM madrasah`;
+
+          // db.all(sql, [], (err, rows)=>{
+          //      if(err) return console.error(err.message);
+          //      rows.forEach(row =>{
+          //           console.log(row)
+          //           // console.log(row.fullName)
+          //           // textToSpeach2(row.fullName, row.personId);
+          //      })
+          // });
+
+          
+
+
+      
+
+
+          setInterval(() => {
+               
+               if (!(mainList === undefined || mainList.length == 0)) {
+   
+                    player.play(`src/audio/${mainList[0]}.mp3`, function(err){
+                         if (err) return console.log(err.message)
+                    })
+                    // console.log(`src/audio/${mainList[0]}.mp3`)
+                    console.log('DELEATE: ', mainList[0])
+                    mainList.shift()
+               } else {
+                    console.log('no requests!!')
+               }
+
+
+          }, 5000);
