@@ -51,32 +51,21 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
 
  scanner.events.on('data', (data) => {
 
-// 6288030000564
-
-
-
-     if(!(typeof data === 'number') && (data.length > 5) ) {
+     data = +data.replace(/[^0-9\.]+/g, "")
 
           sql = `SELECT personId FROM madrasah WHERE barcodeKey = ?`;
 
           db.get(sql, [data], (err, personId)=>{
 
-               
                if(err) return console.error(err.message);
                if(personId == undefined) {
                     console.log('THARE IS NO DATA!!')
                } else {
                     mainList.push(personId.personId)
                     console.log('ADD: ', personId.personId)
-                    // console.log(personId.personId);
                }
                
-          });
-
-     } else {
-          console.log('IS NOT A NUMBER !! OR LESS THEN 5')
-     }
-     
+          }); 
         
 });
 
@@ -103,7 +92,7 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
 
 
 
-// FIRST WAY TO CONFERM TEXT TO SPWACH ** 2  **
+// SECOND WAY TO CONFERM TEXT TO SPWACH ** 2  **
 
 //   async function textToSpeach2(name, barcode) {
 
@@ -121,7 +110,7 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
 //     voice: {languageCode: 'ar-XA', ssmlGender: 'NEUTRAL', name: 'ar-XA-Wavenet-B'},
 //     // select the type of audio encoding
 //     audioConfig: {
-//       audioEncoding: "LINEAR16",
+//       audioEncoding: "MP3",
 //       effectsProfileId: [
 //         "small-bluetooth-speaker-class-device"
 //       ],
@@ -130,16 +119,20 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
 //     },
 //   };
 
+
+// //flac - m4a
 //     // Performs the text-to-speech request
 //     const [response] = await client.synthesizeSpeech(request);
     
 //     // Write the binary audio content to a local file
 //     const writeFile = util.promisify(fs.writeFile);
-//     await writeFile(`src/audio/${barcode}.mp3`, response.audioContent, 'binary');
-//     console.log(`Audio content written to file: ${barcode}.mp3`);
+//     await writeFile(`src/audio/${barcode}.MP3`, response.audioContent, 'binary');
+//     console.log(`Audio content written to file: ${barcode}.MP3`);
 
 
 //   }
+
+
   
 
 
@@ -170,7 +163,7 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
 
           // UPDATE DATA
           // sql = `UPDATE madrasah SET barcodeKey=? WHERE personId=?`;
-          // db.run(sql,[6288030000564, 1129414771], (err)=>{
+          // db.run(sql,[3438965, 1125874525], (err)=>{
           //      if(err) return console.error(err.message);
           // });
 
@@ -187,23 +180,19 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
           // db.all(sql, [], (err, rows)=>{
           //      if(err) return console.error(err.message);
           //      rows.forEach(row =>{
-          //           console.log(row)
-          //           // console.log(row.fullName)
+          //           // console.log(row)
+          //           console.log(`${row.personId} - ${row.barcodeKey}`)
           //           // textToSpeach2(row.fullName, row.personId);
           //      })
           // });
 
-          
-
-
-      
 
 
           setInterval(() => {
                
                if (!(mainList === undefined || mainList.length == 0)) {
    
-                    player.play(`src/audio/${mainList[0]}.mp3`, function(err){
+                    player.play(`src/audio/${mainList[0]}.MP3`, function(err){
                          if (err) return console.log(err.message)
                     })
                     // console.log(`src/audio/${mainList[0]}.mp3`)
@@ -214,4 +203,10 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
                }
 
 
-          }, 5000);
+          }, 2000);
+
+
+          player.play(`src/audio/bsmalah.mp3`, function(err){
+          
+               if (err) return console.log(err.message)
+          })
