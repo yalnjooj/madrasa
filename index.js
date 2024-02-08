@@ -8,6 +8,12 @@ import A from 'dotenv';
 import sqlite3 from 'sqlite3';
 
 const mainList = [];
+const waitingArea = [];
+let timer = 0;
+
+setInterval(() => {
+     timer = (+(new Date().getHours()+''+new Date().getMinutes()+''+(new Date().getSeconds() <= 9? 0+''+new Date().getSeconds() : new Date().getSeconds())));
+}, 1000);
 
 sqlite3.verbose()
 A.config()
@@ -61,8 +67,17 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
                if(personId == undefined) {
                     console.log('THARE IS NO DATA!!')
                } else {
-                    mainList.push(personId.personId)
-                    console.log('ADD: ', personId.personId)
+
+                    if(waitingArea.some(x => x.barcode == personId.personId)) {
+
+                    } else {
+                         
+                         waitingArea.push({barcode: personId.personId, time: timer+30})
+                         mainList.push(personId.personId)
+                         console.log('ADD: ', personId.personId) 
+                    }
+                    
+                    
                }
                
           }); 
@@ -193,20 +208,43 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
                if (!(mainList === undefined || mainList.length == 0)) {
    
                     player.play(`src/audio/${mainList[0]}.MP3`, function(err){
-                         if (err) return console.log(err.message)
+                         if (err) {
+                              return console.log(err.message)
+                         } else {
+                              player.play(`src/audio/${mainList[0]}.MP3`, function(err){
+                                   if (err) {
+                                        return console.log(err.message)
+                                   } else {
+                                        console.log('DELEATE: ', mainList[0])
+                                        mainList.shift()
+                                   }
+                              })
+                         }
                     })
-                    // console.log(`src/audio/${mainList[0]}.mp3`)
-                    console.log('DELEATE: ', mainList[0])
-                    mainList.shift()
+
+                    
                } else {
                     console.log('no requests!!')
                }
 
 
-          }, 2000);
+          }, 8000);
 
+          setInterval(() => {
+               waitingArea.forEach(({barcode, time}, index) => {
+
+                         if (timer < time) {
+                              return
+                         } else {
+                              console.log('delete item')
+                              delete waitingArea[index]
+                         }
+               });
+
+          }, 1000);
 
           player.play(`src/audio/bsmalah.mp3`, function(err){
           
                if (err) return console.log(err.message)
           })
+
