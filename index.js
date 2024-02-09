@@ -72,7 +72,7 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
 
                     } else {
                          
-                         waitingArea.push({barcode: personId.personId, time: timer+30})
+                         waitingArea.push({barcode: personId.personId, time: timer+15})
                          mainList.push(personId.personId)
                          console.log('ADD: ', personId.personId) 
                     }
@@ -228,7 +228,7 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
                }
 
 
-          }, 8000);
+          }, 7000);
 
           setInterval(() => {
                waitingArea.forEach(({barcode, time}, index) => {
@@ -236,7 +236,7 @@ const db = new sqlite3.Database('src/db/database.db', sqlite3.OPEN_READWRITE, (e
                          if (timer < time) {
                               return
                          } else {
-                              console.log('delete item')
+                              console.log('delete from waiting area')
                               delete waitingArea[index]
                          }
                });
